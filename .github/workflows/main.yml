@@ -11,8 +11,11 @@ jobs:
     steps:
     - name: Build the container image
       run: echo "run docker build"
-    - name: Login docker registry
-      run: echo "run docker login"
+    - name: Docker Login
+      uses: docker/login-action@v1.0.0
+      with:
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Push image to docker registry
       run: echo "run docker push"
   
