@@ -1,0 +1,28 @@
+name: CI-CD
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build the container image
+      run: echo "run docker build"
+    - name: Login docker registry
+      run: echo "run docker login"
+    - name: Push image to docker registry
+      run: echo "run docker push"
+  
+  CD:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Authentication to AWS
+      run: echo "AWS authentication"
+    - name: Setting the kubeconfig
+      run: echo "setting the kubeconfig"
+    - name: Apply the deploy
+      run: echo "run kubectl apply"
+    
