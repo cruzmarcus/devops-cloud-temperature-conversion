@@ -39,7 +39,12 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
     - name: Setting the kubeconfig
-      run: echo "setting the kubeconfig"
-    - name: Apply the deploy
-      run: echo "run kubectl apply"
+      run: aws eks update-kubeconfig --name eks-imersion --region us-east-1
+    - name: Deploy to Kubernetes cluster
+      uses: Azure/k8s-deploy@v4.9
+      with:
+        manifest: ./kube-news/k8s/deployment.yaml
+        images: |
+          cruzmarcus/kube-news:v${{ github.run_number }}
+
     
